@@ -1,4 +1,4 @@
-var cityName = document.getElementById('city-searched');
+var city = document.getElementById('city-searched');
 var cityTemp = document.getElementById('Temp');
 var cityWind = document.getElementById('Wind');
 var cityHumidity = document.getElementById('Humidity');
@@ -9,21 +9,16 @@ var searchBtn = document.querySelector(".Search-btn");
 const apiKey = "d7f1d0941df75466d2a1db441fbabc00";
 
 function getWeather (cityName) {
-    let queryURL = queryURL = "http:api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}"
-    fetch(queryURL)
-    .then(function(response) {
-        console.log(response.status)
-        var currentDate = new Date(response.date.dt * 1000);
-        var day = currentDate.getDate();
-        var month = currentDate.getMonth() + 1;
-        var year = currentDate.getFullYear();
-        cityName.innerHTMl = response.date.name + " (" + month + "/" + day + "/" + year + ") ";
+    let queryURL= `http:api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${apiKey}`
+    fetch(queryURL).then(function(response) {
+        if (response.ok) {
+            response.json().then(function (geo) {
+                console.log(geo);
 
-        cityTemp.innerHTML = "Temperature: " + k2f(response.data.main.temp) + " &#176F";
-        cityHumidity.innerHTML = "Humidity: " + response.data.main.humidity + "%";
-        cityWind.innerHTML = "Wind Speed: " + response.data.wind.speed + " MPH";
-    })
-}
+            })
+        }
+    });
+};
 
 
 function searchSection () {
