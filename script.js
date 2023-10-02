@@ -5,6 +5,7 @@ var cityHumidity = document.getElementById('Humidity');
 var historyEl = document.getElementById("history");
 var clearEl = document.getElementById("clear-history");
 var searchBtn = document.querySelector(".Search-btn");
+var searchInput = document.querySelector('#search-input');
 
 const apiKey = "d7f1d0941df75466d2a1db441fbabc00";
 
@@ -19,6 +20,15 @@ function getWeather (cityName) {
         }
     });
 };
+
+function searchWeather(event) {
+    // do something here
+
+    // prevent the page from reloading
+    event.preventDefault();
+    var search = searchInput.value;
+    getWeather(search);
+}
 
 
 function searchSection () {
